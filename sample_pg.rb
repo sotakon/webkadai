@@ -8,7 +8,7 @@ begin
   # connection変数を使いPostgreSQLを操作する
   # .execで、goyaDBに"select weight, give_for from crops;"
   # のSQLの命令文を直接実行し、その結果をresult変数に格納する
-  result = connection.exec("SELECT * FROM crops WHERE give_for != '自家消費' AND quality = 'FALSE';")
+  result = connection.exec("SELECT * FROM crops WHERE give_for != '自家消費' OR quality = 'FALSE';")
   # 取り出した各行を処理する
   result.each do |record|
       # 各行を取り出し、putsでターミナル上に出力する

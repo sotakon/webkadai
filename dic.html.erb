@@ -7,12 +7,7 @@
     <% require 'pg' %>
     <% connection = PG::connect(dbname: "goya") %>
     <% connection.internal_encoding = "UTF-8" %>
-    <form action="indicate.cgi" method="POST">
-       下記に文字を入力してください<br><br>
-      <input type="text"  name="input" ><br>
-      <input type="submit" name="送信" >
-    </form>
-    <% result = connection.exec("SELECT * FROM crops WHERE give_for != '自家消費' AND quality = 'FALSE';") %>
+    <% result = connection.exec("SELECT * FROM crops WHERE give_for != '自家消費' OR quality = 'FALSE';") %>
     <% data = [] %>
     <% result.each do |record| %>
       <%  data << "譲渡先：#{record["give_for"]}　品質：#{record["quality"]}" %>
